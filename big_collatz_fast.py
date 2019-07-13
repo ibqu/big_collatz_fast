@@ -170,10 +170,24 @@ class _Shortcut():
             steps += medium_count_results[1]
             return (odds, steps)
 
+        #need error checking
         def count(n):
+            if type(n) != int:
+                raise TypeError("Non-int given to shortcut.count")
+            if n < 1:
+                raise ValueError("Non-positive number given to shortcut.count")
             return large_count(n)
 
+        def count_steps(n):
+            if type(n) != int:
+                raise TypeError("Non-int given to shortcut.count_steps")
+            if n < 1:
+                raise ValueError("Non-positive number given to shortcut.count_steps")
+            return count(n)[1]
+
         def jump(n, steps):
+            if type(n) != int:
+                raise TypeError("Non-int given to shortcut.count")
             return jump_with_tuple(n, tuple_general(n, steps))
 
         table8 = lookup_table(8)
@@ -191,8 +205,35 @@ class _Shortcut():
         self._large_count = large_count
 
         #export public
-        self.count = count
+        self._count = count
+        self.count_steps = count_steps
         self.jump = jump
+
+class _Ordinary():
+    def __init__(self):
+        global shortcut
+        count = shortcut._count
+        def count_steps(n):
+            if type(n) != int:
+                raise TypeError("Non-int given to ordinary.count_steps")
+            if n < 1:
+                raise ValueError("Non-positive number given to ordinary.count_steps")
+            c = count(n)
+            return c[0] + c[1]
+        self.count_steps = count_steps
+
+class _Odds():
+    def __init__(self):
+        global shortcut
+        count = shortcut._count
+        def count_steps(n):
+            if type(n) != int:
+                raise TypeError("Non-int given to odds.count_steps")
+            if n < 1:
+                raise ValueError("Non-positive number given to odds.count_steps")
+            return count(n)[0]
 
 _misc = _Misc()
 shortcut = _Shortcut()
+ordinary = _Ordinary()
+odds = _Odds()

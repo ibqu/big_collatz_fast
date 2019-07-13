@@ -46,19 +46,19 @@ class TestCount(unittest.TestCase):
     #as with the tuples test, this involves comparison against the naive algorithm.
     def test_count_small(self):
         n = randrange(1, 256)
-        self.assertEqual(shortcut.count(n), shortcut._small_count(n))
+        self.assertEqual(shortcut._count(n), shortcut._small_count(n))
 
     def test_count_small_2(self):
         n = randrange(256, 65536)
-        self.assertEqual(shortcut.count(n), shortcut._small_count(n))
+        self.assertEqual(shortcut._count(n), shortcut._small_count(n))
 
     def test_count_medium(self):
         n = randrange(65536, 1 << 128)
-        self.assertEqual(shortcut.count(n), shortcut._small_count(n))
+        self.assertEqual(shortcut._count(n), shortcut._small_count(n))
 
     def test_count_large(self):
         n = randrange(1 << 128, 1 << (128 + randrange(0, 1024)))
-        self.assertEqual(shortcut.count(n), shortcut._small_count(n))
+        self.assertEqual(shortcut._count(n), shortcut._small_count(n))
 
 class TestJump(unittest.TestCase):
     pass
