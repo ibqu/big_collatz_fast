@@ -76,6 +76,7 @@ big_collatz_fast.odds.count_steps(n)
 ```
 ## Possible improvements
 
+- Add jump code for the ordinary and odds only sequences
 - Optimise `big_collatz_fast.shortcut._tuple64` code and create more efficient equivalents for larger jumps
 - Use a fast integer library for asymptotically faster multiplication
 - Use a faster programming language
